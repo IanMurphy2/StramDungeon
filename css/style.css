@@ -21,6 +21,13 @@ body{
 
 .header__title__span{
     color: #da0037;
+    transition: 0.5s;
+}
+
+.header__title__span:hover{
+    text-shadow: 0 0 30px #da0037,
+    0 0 20px #da0037,
+    0 0 10px #da0037;
 }
 
 .header__title{
@@ -33,4 +40,44 @@ body{
 
 .header__title__main{
     text-decoration: none;
+}
+
+.main__section{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main__section__title{
+    color: #da0037;
+    font-size: 40px;
+    margin: 50px;
+}
+
+.card__div{
+    width: 250px;
+    height: 300px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.card__img{
+    width: 250px;
+    height: 300px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    transition: 2s;
+}
+
+.card__img:hover{
+    transform: scale(1.2);
+}
+
+.card__title{
+    margin: 10px;
+    font-size: 30px;
+    color: #da0037;
 }
