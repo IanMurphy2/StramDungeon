@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>STREAMdungeon</title>
 </head>
 <body>
     <header class="header">
-        <div class="header__div">
-            <h1 class="header__title">FILTROS</h1>
-            <button class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-            <button class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-        </div>
         <div>
             <a href="./index.html" class="header__title__main"><h1 class="header__title">STREAM<span class="header__title__span">DUNGEON</span></h1></a>
         </div>
@@ -25,9 +23,16 @@
     </header>
     <main>
         <section class="main__section">
-            <div id="categorias"></div>
+            <video autoplay loop muted class="gb-video" src="./assets/images/Avengers_ Infinity War - _How To Make A Blockbuster Movie Trailer_ Style.mp4"></video>
+        <div class="main__title__div">
+            <h1 class="main__title">VIVI EL CINE</h1>
+            <h2 class="main__title">EN TU CASA</h2>
+        </div>
+        <div class="main__title__div">
+            <a href="./navegador.html" class="main__div__redirection">ENCONTRA TU PELICULA<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ededed" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M16 3h5v5M4 20L20.2 3.8M21 16v5h-5M15 15l5.1 5.1M4 4l5 5"/></svg></a>
+        </div>
         </section>
     </main>
-    <script src="app.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 </html>
