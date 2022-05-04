@@ -1,4 +1,5 @@
 let password = ""
+let mode = "nightMode"
 
 do{
     if(password == ""){
@@ -7,3 +8,4 @@ do{
         password = prompt("la contraseña ingresada es incorrecta, intente de nuevo (streamdungeon)");
     }
 }while(password != "streamdungeon")
+

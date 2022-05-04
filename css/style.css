@@ -1,11 +1,24 @@
+:root{
+    --bg-night: #171717;
+    --gb-day: #faf3f3;
+    --font-night: #da0037;
+    --font-day: #FC345C;
+    --font-wt: #ededed;
+    --font-bl: #171717;
+}
+
 *{
     padding: 0;
     margin: 0;
     font-family: 'Radio Canada', sans-serif;
 }
 
-body{
-    background-color: #171717;
+.body--nightMode{
+    background-color: var(--bg-night);
+}
+
+.body--dayMode{
+    background-color: var(--gb-day);
 }
 
 .main__title__div{
@@ -20,17 +33,24 @@ body{
     justify-content: space-between;
     align-items: center;
     text-decoration: none;
-    background-color: #da0037;
-    color: #ededed;
     padding: 25px;
-    border: solid 5px #171717;
     border-radius: 50px;
+    color: var(--font-wt);
+    background-color: var(--font-night);
+    border: solid 5px var(--bg-night);
+}
+
+.main__title--nightMode{
+    color: var(--font-night);
+}
+
+.main__title--dayMode{
+    color: var(--font-day);
 }
 
 .main__title{
-    color: #da0037;
     font-size: 100px;
-    text-shadow: 1px 1px 10px #171717;
+    text-shadow: 1px 1px 10px var(--bg-night);
 }
 
 .header{
@@ -45,8 +65,15 @@ body{
     border: none;
 }
 
+.header__title__span--nightMode{
+    color: var(--font-night);
+}
+
+.header__title__span--dayMode{
+    color: var(--font-day);
+}
+
 .header__title__span{
-    color: #da0037;
     transition: 0.5s;
 }
 
@@ -56,8 +83,12 @@ body{
     0 0 10px #da0037;
 }
 
-.header__title{
-    color: #ededed;
+.header__title--nightMode{
+    color: var(--font-wt);
+}
+
+.header__title--dayMode{
+    color: var(--font-bl);
 }
 
 .header__div{
@@ -81,8 +112,15 @@ body{
     align-items: center;
 }
 
+.main__section__title--nightMode{
+    color: var(--font-night);
+}
+
+.main__section__title--dayMode{
+    color: var(--font-day);
+}
+
 .main__section__title{
-    color: #da0037;
     font-size: 40px;
     margin: 50px;
 }
@@ -100,7 +138,6 @@ body{
     border-radius: 50px;
     display: flex;
     align-items: center;
-    background-color: white;
     transition: 2s;
 }
 
@@ -108,10 +145,17 @@ body{
     transform: scale(1.2);
 }
 
+.card__title--nightMode{
+    color: var(--font-night);
+}
+
+.card__title--dayMode{
+    color: var(--font-day);
+}
+
 .card__title{
     margin: 10px;
     font-size: 30px;
-    color: #da0037;
 }
 
 .gb-video{
