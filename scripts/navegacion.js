@@ -12,30 +12,68 @@ const pelicula1 = new peliculas("PERROS", "Perro Romantico", 10, `./assets/image
 const pelicula2 = new peliculas("PERROS", "Perro Gordo", 15, `./assets/images/perroGordo.jpg`);
 const pelicula3 = new peliculas("PERROS", "Marito", 5, `./assets/images/marito.jpg`);
 const pelicula4 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula5 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula6 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula7 = new peliculas("otra categoria", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
 
-categoriaArray = ["PERROS", "GATOS"];
-peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4];
+categoriaArray = ["PERROS", "GATOS", "otra categoria"];
+peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6, pelicula7];
 
-for(let i = 0; i < categoriaArray.length; i++){
-    div__categorias.innerHTML += `<h2 class="main__section__title">${categoriaArray[i]}</h2><div id="cat_peliculas" class="main__section__div"></div>`
-    cat_peliculas.innerHTML += `<button class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>`
-    for(let j = 0; j < peliculasOrdenadas.length; j++){
+const biblioteca = document.querySelector("#main__section");
+
+for(i=0;i<categoriaArray.length;i++){
+    const div__categorias = document.createElement("div");
+    //div__categorias.classList.add("main__section")
+
+    const tituloCategoria = document.createElement("h2");
+    tituloCategoria.classList.add("main__section__title");
+    tituloCategoria.textContent = categoriaArray[i];
+
+    const btn1 = document.createElement("button");
+    btn1.classList.add("header__btn")
+    btn1.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`
+    const btn2 = document.createElement("button");
+    btn2.classList.add("header__btn")
+    btn2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`
+
+    const sectionCategoria = document.createElement("div");
+    sectionCategoria.classList.add("main__section__div");
+    sectionCategoria.appendChild(btn1)
+    
+    for(j = 0; j < peliculasOrdenadas.length; j++){
         if(peliculasOrdenadas[j].categoria == categoriaArray[i]){
-        cat_peliculas.innerHTML += 
-                `
-                <button class="header__btn">
-                <div class="card__div"><img class="card__img" src="${peliculasOrdenadas[j].foto}" width="250" alt="Foto de un ${peliculasOrdenadas[j].titulo}"></div>
-                <h3 class="card__title">${peliculasOrdenadas[j].titulo}</h3>
-                </button>
-                `
-           }
+            const boton = document.createElement("button");
+            boton.classList.add("header__btn")
+            
+            const card = document.createElement("div");
+            card.classList.add("card__div");
+            
+            const pic = document.createElement("img");
+            pic.classList.add("card__img");
+            pic.src = peliculasOrdenadas[j].foto;
+            pic.width = 250;
+            
+            const subtitulo = document.createElement("h3");
+            subtitulo.classList.add("card__title")
+            subtitulo.textContent = peliculasOrdenadas[j].titulo;
+            
+            card.appendChild(pic)
+            boton.appendChild(card)
+            boton.appendChild(subtitulo)
+            sectionCategoria.appendChild(boton)
+        }
     }
-    cat_peliculas.innerHTML += `<button class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>`
+    
+    sectionCategoria.appendChild(btn2)
+    div__categorias.appendChild(tituloCategoria);
+    div__categorias.appendChild(sectionCategoria);
+    
+    biblioteca.appendChild(div__categorias);
 }
 
-do{
-    mode = prompt("Ingrese el modo de la pagina (dayMode / nightMode)")
-}while(mode != "dayMode" && mode != "nightMode")
+// do{
+//     mode = prompt("Ingrese el modo de la pagina (dayMode / nightMode)")
+// }while(mode != "dayMode" && mode != "nightMode")
 
 if(mode == "dayMode"){
     etiqueta = document.querySelector("body")
@@ -46,7 +84,7 @@ if(mode == "dayMode"){
     etiqueta.forEach(e => {
         e.classList.add("header__title--dayMode")
     });
-    etiqueta = document.querySelectorAll(".card__tilte")
+    etiqueta = document.querySelectorAll(".card__title")
     etiqueta.forEach(e => {
         e.classList.add("card__title--dayMode")
     });
