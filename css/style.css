@@ -1,10 +1,13 @@
 :root{
     --bg-night: #171717;
+    --bg-night-secondary: #444444;
     --gb-day: #faf3f3;
+    --bg-day-secondary: #a7bbc7;
     --font-night: #da0037;
     --font-day: #FC345C;
     --font-wt: #ededed;
     --font-bl: #171717;
+    --colorTransition: 2s;
 }
 
 *{
@@ -15,10 +18,12 @@
 
 .body--nightMode{
     background-color: var(--bg-night);
+    transition: var(--colorTransition);
 }
 
 .body--dayMode{
     background-color: var(--gb-day);
+    transition: var(--colorTransition);
 }
 
 .main__title__div{
@@ -42,10 +47,12 @@
 
 .main__title--nightMode{
     color: var(--font-night);
+    transition: var(--colorTransition);
 }
 
 .main__title--dayMode{
     color: var(--font-day);
+    transition: var(--colorTransition);
 }
 
 .main__title{
@@ -60,17 +67,30 @@
     padding: 25px;
 }
 
+.header__bg--nightMode{
+    background-color: var(--bg-night-secondary);
+    transition: var(--colorTransition);
+}
+
+.header__bg--dayMode{
+    background-color: var(--bg-day-secondary);
+    transition: var(--colorTransition);
+}
+
 .header__btn{
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .header__title__span--nightMode{
     color: var(--font-night);
+    transition: var(--colorTransition);
 }
 
 .header__title__span--dayMode{
     color: var(--font-day);
+    transition: var(--colorTransition);
 }
 
 .header__title__span{
@@ -85,10 +105,12 @@
 
 .header__title--nightMode{
     color: var(--font-wt);
+    transition: var(--colorTransition);
 }
 
 .header__title--dayMode{
     color: var(--font-bl);
+    transition: var(--colorTransition);
 }
 
 .header__div{
@@ -114,10 +136,12 @@
 
 .main__section__title--nightMode{
     color: var(--font-night);
+    transition: var(--colorTransition);
 }
 
 .main__section__title--dayMode{
     color: var(--font-day);
+    transition: var(--colorTransition);
 }
 
 .main__section__title{
@@ -166,4 +190,31 @@
     left: 0;
     top: 0;
     z-index: -1;
+}
+
+.display--none{
+    display: none;
+}
+
+.filtros__bg--nightMode{
+    background-color: var(--bg-night-secondary);
+    transition: var(--colorTransition);
+}
+
+.filtros__bg--dayMode{
+    background-color: var(--bg-day-secondary);
+    transition: var(--colorTransition);
+}
+
+.filtros{ 
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainClass__filtros{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    transition: 2s;
 }
