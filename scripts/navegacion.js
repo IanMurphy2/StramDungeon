@@ -12,13 +12,13 @@ function peliculas(categoria, titulo, precio, foto){
     this.foto = foto;
 }
 
-const pelicula1 = new peliculas("PERROS", "Perro Romantico", 10, `./assets/images/perroRomantico.jpg`);
-const pelicula2 = new peliculas("PERROS", "Perro Gordo", 15, `./assets/images/perroGordo.jpg`);
+const pelicula1 = new peliculas("PERROS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
+const pelicula2 = new peliculas("PERROS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
 const pelicula3 = new peliculas("PERROS", "Marito", 5, `./assets/images/marito.jpg`);
-const pelicula4 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula5 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`);
-const pelicula6 = new peliculas("GATOS", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula7 = new peliculas("otra categoria", "Gato Gordo", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula4 = new peliculas("GATOS", "Gato 1", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula5 = new peliculas("GATOS", "Gato 2", 20, `./assets/images/gatoGordo.jpg`);
+const pelicula6 = new peliculas("GATOS", "Gato 3", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula7 = new peliculas("otra categoria", "Gato 5", 20, `./assets/images/gatoGordo.jpg`); 
 
 categoriaArray = ["PERROS", "GATOS", "otra categoria"];
 peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6, pelicula7];
@@ -80,11 +80,20 @@ for(i=0;i<categoriaArray.length;i++){
 
 // -----------------------------LLamado a Eventos ----------------------
 
+document.addEventListener("DOMContentLoaded", function(){
+    if(localStorage.getItem("theme") == "nightMode"){
+        nightTheme()
+    }else{
+        dayTheme()
+    }
+})
+
 let btn_sol = document.querySelector("#sol");
 btn_sol.addEventListener("click", dayTheme) 
 
 let btn_luna = document.querySelector("#luna");
 btn_luna.addEventListener("click", nightTheme)
+
 
 let btn_filtros = document.querySelector("#filtros")
 btn_filtros.addEventListener("click", mostrarFiltros)
@@ -126,6 +135,8 @@ function dayTheme(){
         e.classList.remove("main__section__title--nightMode")
         e.classList.add("main__section__title--dayMode")
     });
+
+    localStorage.setItem("theme", "dayMode")
 }
 
 function nightTheme(){
@@ -159,6 +170,8 @@ function nightTheme(){
         e.classList.remove("main__section__title--dayMode")
         e.classList.add("main__section__title--nightMode")
     });
+
+    localStorage.setItem("theme", "nightMode")
 }
 
 //_____________ Filtros ______________________________
