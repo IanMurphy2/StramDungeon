@@ -80,13 +80,7 @@ for(i=0;i<categoriaArray.length;i++){
 
 // -----------------------------LLamado a Eventos ----------------------
 
-document.addEventListener("DOMContentLoaded", function(){
-    if(localStorage.getItem("theme") == "nightMode"){
-        nightTheme()
-    }else{
-        dayTheme()
-    }
-})
+document.addEventListener("DOMContentLoaded", () => localStorage.getItem("theme") == "nightMode" ? nightTheme() : dayTheme())
 
 let btn_sol = document.querySelector("#sol");
 btn_sol.addEventListener("click", dayTheme) 
