@@ -65,7 +65,7 @@
     position: sticky;
     top: 0;
     z-index: 0;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 25px;
 }
@@ -220,4 +220,25 @@
     display: grid;
     grid-template-columns: 2fr 10fr;
     transition: 2s;
+}
+
+.section__form{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    height: 300px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.form__div{
+    display: flex;
 }
