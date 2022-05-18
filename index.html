@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>STREAMdungeon</title>
+    <title>LogIn</title>
 </head>
-<body class="body--nightMode">
+<body class="body--dayMode">
     <header class="header">
-            <a href="./index.html" class="header__title__main"><h1 class="header__title header__title--nightMode">STREAM<span class="header__title__span--nightMode header__title__span">DUNGEON</span></h1></a>
+        <a href="./index.html" class="header__title__main"><h1 class="header__title header__title--nightMode">STREAM<span class="header__title__span--nightMode header__title__span">DUNGEON</span></h1></a>
     </header>
-    <main>
-        <section class="main__section">
-            <video autoplay loop muted class="gb-video" src="./assets/images/Avengers_ Infinity War - _How To Make A Blockbuster Movie Trailer_ Style.mp4"></video>
-        <div class="main__title__div">
-            <h1 class="main__title main__title--nightMode">VIVI EL CINE</h1>
-            <h2 class="main__title main__title--nightMode">EN TU CASA</h2>
+    <section class="section__form">
+    <form action="" class="form" id="formInicio">
+
+        <div class="form__div">
+        <label for="usuario">Usuario</label>
+        <input type="text" name="usuario" id="user" placeholder="Usuario" class="usr_input">
         </div>
-        <div class="main__title__div">
-            <a href="./navegador.html" class="main__div__redirection">ENCONTRA TU PELICULA<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ededed" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M16 3h5v5M4 20L20.2 3.8M21 16v5h-5M15 15l5.1 5.1M4 4l5 5"/></svg></a>
+
+        <div class="form__div">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" id="pass" name="contraseña" placeholder="Contraseña">
         </div>
-        </section>
-    </main>
+
+        <input type="submit" value="Enviar">
+    </form>
+    <button id="registro">Registrarme</button>
+    </section>
+    <script src="./scripts/logIn.js"></script>
 </body>
 </html>
