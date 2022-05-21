@@ -92,9 +92,10 @@ btn_luna.addEventListener("click", nightTheme)
 let btn_filtros = document.querySelector("#filtros")
 btn_filtros.addEventListener("click", mostrarFiltros)
 
+let btn_lupa = document.querySelector("#btn_lupa")
+btn_lupa.addEventListener("click", mostrarBusqueda)
 
 //------------------------  EVENTOS  ---------------------------------
-
 
 //__________ Modo dia / Modo noche ________________
 
@@ -195,4 +196,23 @@ function mostrarFiltros(){
     filtros = "off"
     }
     
+}
+
+//________________LUPA_____________
+
+function mostrarBusqueda(){
+
+    const { value: text } = Swal.fire({
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+          'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+      })
+      
+      if (text) {
+        Swal.fire(text)
+      }
 }

@@ -10,10 +10,15 @@
     --colorTransition: 2s;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+  }
+
 *{
     padding: 0;
     margin: 0;
     font-family: 'Radio Canada', sans-serif;
+    
 }
 
 .body--nightMode{

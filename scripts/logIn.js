@@ -1,3 +1,4 @@
+
 const datos = {user: "", pass: ""};
 
 user = document.querySelector("#user")
@@ -14,12 +15,24 @@ formularioInicio.addEventListener("submit", () =>{
 })
 
 function mensajeIngresa(){
-window.location.href = "./presentacion.html"
-   // alert("ingresa")
+    Swal.fire({
+        theme: "dark",
+        title: "Contraeña correcta",
+        text: "Disfrute su pelicula :)",
+        icon: "success",
+        showConfirmButton: false
+    })
+    setTimeout(() => {window.location.href = "./presentacion.html"}, 2000)
 }
 
 function mensajeError(){
-    alert("error")
+    Swal.fire({
+        theme: "dark",
+        title: "Error!",
+        text: "Usuaro o contraseña incorrecta",
+        icon: "error",
+        confirmButton: "OK"
+    })
 }
 
 registro = document.querySelector("#registro")
@@ -38,15 +51,17 @@ function registrarse(){
     innerDiv(div_C_pass,"Confirmación","","","password","Reingrese contraseña","C_pass_input")
 
     const btn_enviar = document.createElement("button")
-    btn_enviar.textContent = "hola"
+    btn_enviar.textContent = "Confirmar"
     div_enviar.appendChild(btn_enviar)
 
     const formularioRegistro = document.createElement("form")
+    formularioRegistro.id = "registro_form"
 
     formularioRegistro.appendChild(div_user)
     formularioRegistro.appendChild(div_pass)
     formularioRegistro.appendChild(div_C_pass)
     formularioRegistro.appendChild(div_enviar)
+    formularioRegistro.appendChild(btn_enviar)
 
     const section_form = document.querySelector(".section__form")
     section_form.appendChild(formularioRegistro)
@@ -72,4 +87,8 @@ function innerDiv(div,mensaje='',clase_lbl='',clase_input='',typeI='', plchldr='
  
      div.appendChild(label);
      div.appendChild(input);
- }
+
+    }
+    
+    
+    
