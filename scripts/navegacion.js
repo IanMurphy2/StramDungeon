@@ -12,16 +12,24 @@ function peliculas(categoria, titulo, precio, foto){
     this.foto = foto;
 }
 
-const pelicula1 = new peliculas("PERROS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
-const pelicula2 = new peliculas("PERROS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
-const pelicula3 = new peliculas("PERROS", "Marito", 5, `./assets/images/marito.jpg`);
+const pelicula1 = new peliculas("GATOS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
+const pelicula2 = new peliculas("GATOS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
+const pelicula3 = new peliculas("GATOS", "Marito", 5, `./assets/images/marito.jpg`);
 const pelicula4 = new peliculas("GATOS", "Gato 1", 20, `./assets/images/gatoGordo.jpg`); 
 const pelicula5 = new peliculas("GATOS", "Gato 2", 20, `./assets/images/gatoGordo.jpg`);
 const pelicula6 = new peliculas("GATOS", "Gato 3", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula7 = new peliculas("otra categoria", "Gato 5", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula7 = new peliculas("GATOS", "Gato 4", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula8 = new peliculas("PERROS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
+const pelicula9 = new peliculas("PERROS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
+const pelicula10 = new peliculas("PERROS", "Marito", 5, `./assets/images/marito.jpg`);
+const pelicula11 = new peliculas("PERROS", "Gato 1", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula12 = new peliculas("PERROS", "Gato 2", 20, `./assets/images/gatoGordo.jpg`);
+const pelicula13 = new peliculas("PERROS", "Gato 3", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula14 = new peliculas("PERROS", "Gato 4", 20, `./assets/images/gatoGordo.jpg`); 
+const pelicula15 = new peliculas("PERROS", "Gato 5", 20, `./assets/images/gatoGordo.jpg`); 
 
 categoriaArray = ["PERROS", "GATOS", "otra categoria"];
-peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6, pelicula7];
+peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6, pelicula7, pelicula8, pelicula9, pelicula10, pelicula11,pelicula12,pelicula13,pelicula14, pelicula15];
 
 // ------------------ Constructor HTML -------------------------------------------------------------------------------
 
@@ -32,13 +40,15 @@ for(i=0;i<categoriaArray.length;i++){
     const tituloCategoria = document.createElement("h2");
     tituloCategoria.classList.add("main__section__title");
     tituloCategoria.classList.add("main__section__title--nightMode");
-
+    
     tituloCategoria.textContent = categoriaArray[i];
-
+    
     const btn1 = document.createElement("button");
+    btn1.id = "btnIzquierda"
     btn1.classList.add("header__btn")
     btn1.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`
     const btn2 = document.createElement("button");
+    btn2.id = "btnDerecha"
     btn2.classList.add("header__btn")
     btn2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`
 
@@ -46,10 +56,12 @@ for(i=0;i<categoriaArray.length;i++){
     sectionCategoria.classList.add("main__section__div");
     sectionCategoria.appendChild(btn1)
     
+    const divPelis = document.createElement("div")
     for(j = 0; j < peliculasOrdenadas.length; j++){
         if(peliculasOrdenadas[j].categoria == categoriaArray[i]){
+            divPelis.classList.add("carousel")
             const boton = document.createElement("button");
-            boton.classList.add("header__btn")
+            boton.classList.add("movie__btn")
             
             const card = document.createElement("div");
             card.classList.add("card__div");
@@ -67,8 +79,9 @@ for(i=0;i<categoriaArray.length;i++){
             card.appendChild(pic)
             boton.appendChild(card)
             boton.appendChild(subtitulo)
-            sectionCategoria.appendChild(boton)
+            divPelis.appendChild(boton)
         }
+        sectionCategoria.appendChild(divPelis)
     }
     
     sectionCategoria.appendChild(btn2)
@@ -77,6 +90,34 @@ for(i=0;i<categoriaArray.length;i++){
     
     biblioteca.appendChild(div__categorias);
 }
+
+scrollPelis = document.querySelectorAll(".carousel")
+btnDerecha = document.querySelectorAll("#btnDerecha")
+
+scrollPelis.forEach(element => {
+    btnDerecha.forEach(e => {
+        e.addEventListener("click", () => {
+            element.scrollBy({
+                left: 1300,
+                behavior: "smooth"
+            })
+        })
+    })
+})
+
+
+btnIzquierda = document.querySelectorAll("#btnIzquierda")
+
+scrollPelis.forEach(element => {
+    btnIzquierda.forEach(e => {
+        e.addEventListener("click", () => {
+            element.scrollBy({
+                left: -1300,
+                behavior: "smooth"
+            })
+        })
+    })
+})
 
 // -----------------------------LLamado a Eventos ----------------------
 
@@ -94,6 +135,22 @@ btn_filtros.addEventListener("click", mostrarFiltros)
 
 let btn_lupa = document.querySelector("#btn_lupa")
 btn_lupa.addEventListener("click", mostrarBusqueda)
+
+const header = document.querySelector("#header")
+
+window.addEventListener("scroll", ()=>{
+    let scroll = this.scrollY
+    if(scroll >= 50){
+    header.classList.remove("header__bg--transparent")
+    localStorage.getItem("theme") == "nightMode" ? header.classList.add("header__bg--nightMode") : header.classList.add("header__bg--dayMode")
+    }else{
+        header.classList.add("header__bg--transparent")
+        header.classList.remove("header__bg--nightMode")
+        header.classList.remove("header__bg--dayMode")
+    }    
+
+}
+)
 
 //------------------------  EVENTOS  ---------------------------------
 

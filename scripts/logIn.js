@@ -35,8 +35,23 @@ function mensajeError(){
     })
 }
 
+let formularioRegistro = document.createElement("form")
+const section_form = document.querySelector(".section__form")
 registro = document.querySelector("#registro")
-registro.addEventListener("click", () => {registrarse()}, {once: true});
+
+registro.addEventListener("click", () => {
+    formularioRegistro = registrarse()
+    newUser = document.getElementById("user_input")
+    newPass = document.getElementById("pass_input")
+    newPassConf = document.getElementById("C_pass_input")
+    
+   
+});
+
+formularioRegistro.addEventListener("submit", function(event){
+    event.preventDefault()
+    console.log(newUser.value)
+})
 
 function registrarse(){
     const h3 = document.createElement('h3');
@@ -54,7 +69,6 @@ function registrarse(){
     btn_enviar.textContent = "Confirmar"
     div_enviar.appendChild(btn_enviar)
 
-    const formularioRegistro = document.createElement("form")
     formularioRegistro.id = "registro_form"
 
     formularioRegistro.appendChild(div_user)
@@ -63,13 +77,11 @@ function registrarse(){
     formularioRegistro.appendChild(div_enviar)
     formularioRegistro.appendChild(btn_enviar)
 
-    const section_form = document.querySelector(".section__form")
     section_form.appendChild(formularioRegistro)
 
     formularioInicio.classList.remove("form")
     formularioInicio.classList.add("display--none")
     registro.classList.add("display--none")
-    
     
 }
 

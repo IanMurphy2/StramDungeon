@@ -18,7 +18,6 @@
     padding: 0;
     margin: 0;
     font-family: 'Radio Canada', sans-serif;
-    
 }
 
 .body--nightMode{
@@ -69,10 +68,15 @@
     display: flex;
     position: sticky;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     justify-content: space-around;
     align-items: center;
     padding: 25px;
+}
+
+.header__bg--transparent{
+    background-color: transparent;
+    transition: 1s;
 }
 
 .header__bg--nightMode{
@@ -86,6 +90,13 @@
 }
 
 .header__btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.movie__btn{
+    margin: 30px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -136,9 +147,16 @@
 }
 
 .main__section__div{
+    width: 100vw;
     display: flex;
-    flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
+}
+
+.carousel{
+    display: flex;
+    overflow: scroll;
+    flex-wrap: nowrap;
     align-items: center;
 }
 
@@ -216,6 +234,7 @@
 
 .filtros{ 
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
