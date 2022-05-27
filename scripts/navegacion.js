@@ -3,121 +3,198 @@
 let etiqueta
 let filtros = "off"
 
-//--------------- Objetos y Arrays -------------------------------------------------------------------------------
+const API_KEY = "api_key=9710362e22c45a4c7c3cf4e7afca34d7"
+const  BASE_URL = "https://api.themoviedb.org/3"
+const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY
+const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-function peliculas(categoria, titulo, precio, foto){
-    this.categoria = categoria;
-    this.titulo = titulo;
-    this.precio = precio;
-    this.foto = foto;
-}
+const fecha = new Date();
 
-const pelicula1 = new peliculas("GATOS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
-const pelicula2 = new peliculas("GATOS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
-const pelicula3 = new peliculas("GATOS", "Marito", 5, `./assets/images/marito.jpg`);
-const pelicula4 = new peliculas("GATOS", "Gato 1", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula5 = new peliculas("GATOS", "Gato 2", 20, `./assets/images/gatoGordo.jpg`);
-const pelicula6 = new peliculas("GATOS", "Gato 3", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula7 = new peliculas("GATOS", "Gato 4", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula8 = new peliculas("PERROS", "Perro 1", 10, `./assets/images/perroRomantico.jpg`);
-const pelicula9 = new peliculas("PERROS", "Perro 2", 15, `./assets/images/perroGordo.jpg`);
-const pelicula10 = new peliculas("PERROS", "Marito", 5, `./assets/images/marito.jpg`);
-const pelicula11 = new peliculas("PERROS", "Gato 1", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula12 = new peliculas("PERROS", "Gato 2", 20, `./assets/images/gatoGordo.jpg`);
-const pelicula13 = new peliculas("PERROS", "Gato 3", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula14 = new peliculas("PERROS", "Gato 4", 20, `./assets/images/gatoGordo.jpg`); 
-const pelicula15 = new peliculas("PERROS", "Gato 5", 20, `./assets/images/gatoGordo.jpg`); 
+let dia = fecha.getDate()
+dia > 9? dia = fecha.getDate() : dia = `0${fecha.getDate()}`
+let mes = fecha.getMonth()
+mes > 9? mes = fecha.getMonth() : mes = `0${fecha.getMonth()}`
 
-categoriaArray = ["PERROS", "GATOS", "otra categoria"];
-peliculasOrdenadas = [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5, pelicula6, pelicula7, pelicula8, pelicula9, pelicula10, pelicula11,pelicula12,pelicula13,pelicula14, pelicula15];
+const API_URL_LATEST = BASE_URL + `/discover/movie?primary_release_date.gte=${fecha.getFullYear()}-${mes}-${dia}&primary_release_date.lte=${fecha.getFullYear()}-${mes}-${dia}&` + API_KEY
+
+
+console.log(`${fecha.getFullYear()}-${mes}-${dia}`)
+
+const generos = [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+
+getLatMovies(API_URL_LATEST);
+getPopMovies(API_URL);
+getPopMovies(API_URL_LATEST);
 
 // ------------------ Constructor HTML -------------------------------------------------------------------------------
 
-const biblioteca = document.querySelector("#main__section");
-
-for(i=0;i<categoriaArray.length;i++){
-    const div__categorias = document.createElement("div");
-    const tituloCategoria = document.createElement("h2");
-    tituloCategoria.classList.add("main__section__title");
-    tituloCategoria.classList.add("main__section__title--nightMode");
-    
-    tituloCategoria.textContent = categoriaArray[i];
-    
-    const btn1 = document.createElement("button");
-    btn1.id = "btnIzquierda"
-    btn1.classList.add("header__btn")
-    btn1.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`
-    const btn2 = document.createElement("button");
-    btn2.id = "btnDerecha"
-    btn2.classList.add("header__btn")
-    btn2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`
-
-    const sectionCategoria = document.createElement("div");
-    sectionCategoria.classList.add("main__section__div");
-    sectionCategoria.appendChild(btn1)
-    
-    const divPelis = document.createElement("div")
-    for(j = 0; j < peliculasOrdenadas.length; j++){
-        if(peliculasOrdenadas[j].categoria == categoriaArray[i]){
-            divPelis.classList.add("carousel")
-            const boton = document.createElement("button");
-            boton.classList.add("movie__btn")
-            
-            const card = document.createElement("div");
-            card.classList.add("card__div");
-            
-            const pic = document.createElement("img");
-            pic.classList.add("card__img");
-            pic.src = peliculasOrdenadas[j].foto;
-            pic.width = 250;
-            
-            const subtitulo = document.createElement("h3");
-            subtitulo.classList.add("card__title")
-            subtitulo.classList.add("card__title--nightMode")
-            subtitulo.textContent = peliculasOrdenadas[j].titulo;
-            
-            card.appendChild(pic)
-            boton.appendChild(card)
-            boton.appendChild(subtitulo)
-            divPelis.appendChild(boton)
-        }
-        sectionCategoria.appendChild(divPelis)
-    }
-    
-    sectionCategoria.appendChild(btn2)
-    div__categorias.appendChild(tituloCategoria);
-    div__categorias.appendChild(sectionCategoria);
-    
-    biblioteca.appendChild(div__categorias);
+function getPopMovies(url){
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.results)
+        console.log(generos)
+        showMovies(data.results)
+    })
+    .catch(err => console.log(err))
 }
 
-scrollPelis = document.querySelectorAll(".carousel")
-btnDerecha = document.querySelectorAll("#btnDerecha")
+function getLatMovies(url){
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+      console.log(data.results)
+      console.log(generos)
+      showCarousel(data.results)
+  })
+  .catch(err => console.log(err))
+}
 
-scrollPelis.forEach(element => {
-    btnDerecha.forEach(e => {
-        e.addEventListener("click", () => {
-            element.scrollBy({
-                left: 1300,
-                behavior: "smooth"
-            })
-        })
-    })
+function showCarousel(data){
+  data.forEach(movie => {
+    const {title, poster_path, vote_average, overview, id} = movie;
+    const carousel = document.querySelector(".carousel");
+    // carousel.innerHTML += `               
+    // <div class="card__div movie__btn card__div">
+    // <img src="${IMG_URL + poster_path}" class="card__img" alt="" width="250" height="250">
+    // </div>
+    // ` 
+    const carousel_div = document.createElement("div")
+    const carousel_btn = document.createElement("button")
+    carousel_btn.classList.add("movie__btn")
+    const carousel_img = document.createElement("img")
+    carousel_img.src = IMG_URL + poster_path
+    carousel_img.classList.add("card__img")
+    carousel_btn.appendChild(carousel_img)
+    carousel_div.appendChild(carousel_btn)
+    carousel.appendChild(carousel_div)
+  })
+}
+
+
+function showMovies(data){
+  data.forEach(movie => {
+    const {title, poster_path, vote_average, overview, id} = movie;
+    const biblioteca = document.querySelector("#main__section");
+    biblioteca.innerHTML += `               
+    <div class="card__div movie__btn card__div">
+    <img src="${IMG_URL + poster_path}" class="card__img" alt="" width="250" height="250">
+    </div>
+    ` 
+  });
+}
+
+scrollPelis = document.querySelector(".carousel")
+btnDerecha = document.querySelector("#btnDerecha")
+
+
+
+btnDerecha.addEventListener("click", () => {
+  scrollPelis.scrollBy({
+      left: 1250,
+      behavior: "smooth"
+  })
+})        
+
+btnIzquierda = document.querySelector("#btnIzquierda")
+
+btnIzquierda.addEventListener("click", () => {
+  scrollPelis.scrollBy({
+      left: -1250,
+      behavior: "smooth"
+  })
 })
 
+// scrollPelis = document.querySelectorAll(".carousel")
+// btnArriba = document.querySelectorAll("#btnArriba")
 
-btnIzquierda = document.querySelectorAll("#btnIzquierda")
-
-scrollPelis.forEach(element => {
-    btnIzquierda.forEach(e => {
-        e.addEventListener("click", () => {
-            element.scrollBy({
-                left: -1300,
-                behavior: "smooth"
-            })
-        })
-    })
-})
+// scrollPelis.forEach(element => {
+//     btnDerecha.forEach(e => {
+//         e.addEventListener("click", () => {
+//             element.scrollBy({
+//                 left: 1300,
+//                 behavior: "smooth"
+//             })
+//         })
+//     })
+// })
 
 // -----------------------------LLamado a Eventos ----------------------
 
@@ -148,9 +225,7 @@ window.addEventListener("scroll", ()=>{
         header.classList.remove("header__bg--nightMode")
         header.classList.remove("header__bg--dayMode")
     }    
-
-}
-)
+})
 
 //------------------------  EVENTOS  ---------------------------------
 

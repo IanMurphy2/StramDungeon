@@ -69,7 +69,14 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+}
+
+.header__presentacion{
+    display: flex;
+    justify-content: center;
     align-items: center;
     padding: 25px;
 }
@@ -141,9 +148,18 @@
 }
 
 .main__section{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main__presentacion{
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .main__section__div{
