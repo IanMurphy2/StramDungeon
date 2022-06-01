@@ -7,6 +7,7 @@ const API_KEY = "api_key=9710362e22c45a4c7c3cf4e7afca34d7"
 const  BASE_URL = "https://api.themoviedb.org/3"
 const API_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const searchURL = BASE_URL + "/search/movie?" + API_KEY
 
 const fecha = new Date();
 
@@ -15,12 +16,9 @@ dia > 9? dia = fecha.getDate() : dia = `0${fecha.getDate()}`
 let mes = fecha.getMonth()
 mes > 9? mes = fecha.getMonth() : mes = `0${fecha.getMonth()}`
 
-const API_URL_LATEST = BASE_URL + `/discover/movie?primary_release_date.gte=${fecha.getFullYear()}-${mes}-${dia}&primary_release_date.lte=${fecha.getFullYear()}-${mes}-${dia}&` + API_KEY
+const API_URL_LATEST = BASE_URL + `/discover/movie?primary_release_date.gte=${fecha.getFullYear()}-${mes}-${dia-1}&primary_release_date.lte=${fecha.getFullYear()}-${mes}-${dia}&` + API_KEY
 
-
-console.log(`${fecha.getFullYear()}-${mes}-${dia}`)
-
-const generos = [
+let generos = [
     {
       "id": 28,
       "name": "Action"
@@ -101,41 +99,36 @@ const generos = [
 
 getLatMovies(API_URL_LATEST);
 getPopMovies(API_URL);
-getPopMovies(API_URL_LATEST);
 
 // ------------------ Constructor HTML -------------------------------------------------------------------------------
+
+const biblioteca = document.querySelector("#main__section");
 
 function getPopMovies(url){
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data.results)
-        console.log(generos)
+      if(data.results != 0){
         showMovies(data.results)
+      }else{
+        biblioteca.innerHTML= "No se encontraron resultados"
+      }
     })
+
     .catch(err => console.log(err))
 }
 
 function getLatMovies(url){
   fetch(url)
   .then(res => res.json())
-  .then(data => {
-      console.log(data.results)
-      console.log(generos)
-      showCarousel(data.results)
-  })
-  .catch(err => console.log(err))
+  .then(data => showCarousel(data.results))
+  //.catch(err => console.log(err))
 }
 
 function showCarousel(data){
   data.forEach(movie => {
     const {title, poster_path, vote_average, overview, id} = movie;
     const carousel = document.querySelector(".carousel");
-    // carousel.innerHTML += `               
-    // <div class="card__div movie__btn card__div">
-    // <img src="${IMG_URL + poster_path}" class="card__img" alt="" width="250" height="250">
-    // </div>
-    // ` 
     const carousel_div = document.createElement("div")
     const carousel_btn = document.createElement("button")
     carousel_btn.classList.add("movie__btn")
@@ -152,7 +145,6 @@ function showCarousel(data){
 function showMovies(data){
   data.forEach(movie => {
     const {title, poster_path, vote_average, overview, id} = movie;
-    const biblioteca = document.querySelector("#main__section");
     biblioteca.innerHTML += `               
     <div class="card__div movie__btn card__div">
     <img src="${IMG_URL + poster_path}" class="card__img" alt="" width="250" height="250">
@@ -182,19 +174,8 @@ btnIzquierda.addEventListener("click", () => {
   })
 })
 
-// scrollPelis = document.querySelectorAll(".carousel")
-// btnArriba = document.querySelectorAll("#btnArriba")
-
-// scrollPelis.forEach(element => {
-//     btnDerecha.forEach(e => {
-//         e.addEventListener("click", () => {
-//             element.scrollBy({
-//                 left: 1300,
-//                 behavior: "smooth"
-//             })
-//         })
-//     })
-// })
+const return__btn = document.querySelector(".return__btn")
+return__btn.addEventListener("click", () => window.scrollTo({top: 0, behavior:"smooth"}))
 
 // -----------------------------LLamado a Eventos ----------------------
 
@@ -209,9 +190,6 @@ btn_luna.addEventListener("click", nightTheme)
 
 let btn_filtros = document.querySelector("#filtros")
 btn_filtros.addEventListener("click", mostrarFiltros)
-
-let btn_lupa = document.querySelector("#btn_lupa")
-btn_lupa.addEventListener("click", mostrarBusqueda)
 
 const header = document.querySelector("#header")
 
@@ -262,8 +240,8 @@ function dayTheme(){
         e.classList.remove("main__section__title--nightMode")
         e.classList.add("main__section__title--dayMode")
     });
-
     localStorage.setItem("theme", "dayMode")
+    marcarSeleccion()
 }
 
 function nightTheme(){
@@ -297,14 +275,17 @@ function nightTheme(){
         e.classList.remove("main__section__title--dayMode")
         e.classList.add("main__section__title--nightMode")
     });
-
     localStorage.setItem("theme", "nightMode")
+    marcarSeleccion()
 }
 
 //_____________ Filtros ______________________________
 
+
 function mostrarFiltros(){
+    const main__section__div = document.querySelector("#main__section__div")
     if(filtros == "off"){
+    main__section__div.classList.add("view80")
     cuerpo = document.querySelector("#main")
     cuerpo.classList.add("mainClass__filtros")
     cuerpo = document.querySelector("#aside")
@@ -315,8 +296,11 @@ function mostrarFiltros(){
     cuerpo = document.querySelector("#btn_menos")
     cuerpo.classList.remove("display--none")
     filtros = "on"
+    mostarCategorias()
+    marcarSeleccion()
     }else{
-        cuerpo = document.querySelector("#main")
+    main__section__div.classList.remove("view80")
+    cuerpo = document.querySelector("#main")
     cuerpo.classList.remove("mainClass__filtros")
     cuerpo = document.querySelector("#aside")
     cuerpo.classList.remove("filtros")
@@ -330,21 +314,99 @@ function mostrarFiltros(){
     
 }
 
-//________________LUPA_____________
+//________________BUSQUEDA_____________
 
-function mostrarBusqueda(){
+const form_busq = document.querySelector("#form_busq")
+const busqueda = document.querySelector(".busqueda")
+const main__section__div = document.querySelector(".main__section__div")
+const estrenos = document.querySelector("#estrenos")
 
-    const { value: text } = Swal.fire({
-        input: 'textarea',
-        inputLabel: 'Message',
-        inputPlaceholder: 'Type your message here...',
-        inputAttributes: {
-          'aria-label': 'Type your message here'
-        },
-        showCancelButton: true
+form_busq.addEventListener("submit", (e) => {
+  e.preventDefault()
+  biblioteca.innerHTML = ""
+  const searchTerm = busqueda.value
+  catSeleccionada = []
+  if(searchTerm){
+    main__section__div.classList.add("display--none")
+    estrenos.classList.add("display--none")
+    getPopMovies(searchURL + "&query=" + searchTerm)
+  }else{
+    estrenos.classList.remove("display--none")
+    main__section__div.classList.remove("display--none")
+    getLatMovies(API_URL_LATEST);
+    getPopMovies(API_URL);
+  }
+})
+
+//________________FILTROS_____________
+
+const listaCats = document.querySelector("#listaCats")
+let catSeleccionada = []
+function mostarCategorias() {
+  listaCats.innerHTML= ""
+  generos.forEach(genero => {
+      const t = document.createElement('li');
+      t.classList.add('listaCats__cat');
+      t.id=genero.id;
+      t.innerText = genero.name;
+      t.addEventListener('click', () => {
+          if(catSeleccionada.length == 0){
+            catSeleccionada.push(genero.id);
+          }else{
+              if(catSeleccionada.includes(genero.id)){
+                catSeleccionada.forEach((id, idx) => {
+                      if(id == genero.id){
+                        catSeleccionada.splice(idx, 1);
+                      }
+                  })
+              }else{
+                catSeleccionada.push(genero.id);
+              }
+          }
+          console.log(catSeleccionada)
+          estrenos.innerHTML= ""
+          main__section__div.innerHTML= ""
+          biblioteca.innerHTML= ''
+          getPopMovies(API_URL + '&with_genres='+ encodeURI(catSeleccionada.join(',')))
+          marcarSeleccion()
       })
-      
-      if (text) {
-        Swal.fire(text)
-      }
+      listaCats.append(t);
+  })
+}
+
+function marcarSeleccion() {
+  const tags = document.querySelectorAll('.listaCats__cat');
+  tags.forEach(tag => {
+      tag.classList.remove('highlight--night')
+      tag.classList.remove('highlight--day')
+  })
+  clearBtn()
+  if(catSeleccionada.length !=0){   
+      catSeleccionada.forEach(id => {
+          const hightlightedTag = document.getElementById(id);
+          localStorage.getItem("theme") == "nightMode" ? hightlightedTag.classList.add('highlight--night') : hightlightedTag.classList.add('highlight--day')
+      })
+  }
+
+}
+
+function clearBtn(){
+  let clearBtn = document.getElementById('clear');
+  if(clearBtn){
+      localStorage.getItem("theme") == "nightMode" ? clearBtn.classList.add('highlight--night') : clearBtn.classList.add('highlight--day')
+  }else{     
+      let clear = document.createElement('div');
+      clear.classList.add('listaCats__cat');
+      localStorage.getItem("theme") == "nightMode" ? clear.classList.add('highlight--night') : clear.classList.add('highlight--day')
+      clear.id = 'clear';
+      clear.innerText = 'Borrar filtros';
+      clear.addEventListener('click', () => {
+          catSeleccionada = [];
+          biblioteca.innerHTML = ""          
+          getPopMovies(API_URL)
+          marcarSeleccion()
+      })
+      listaCats.append(clear);
+  }
+  
 }

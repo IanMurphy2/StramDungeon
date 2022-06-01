@@ -16,7 +16,10 @@
                 <svg id="btn_mas" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 <svg id="btn_menos" class="display--none" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#da0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
+            <form action="" id="form_busq" class="form_busq">
+            <input type="text" class="busqueda" placeholder="  Buscar">
             <button class="header__btn"><svg id="btn_lupa" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+            </form>
         </div>
         <div>
             <a href="./presentacion.html" class="header__title__main "><h1 class="header__title--nightMode">STREAM<span class="header__title__span header__title__span--nightMode">DUNGEON</span></h1></a>
@@ -29,34 +32,20 @@
     </header>
     <main id="main" class="">
         <aside id="aside" class="display--none filtros__bg--nightMode">
-            <h3>CATEGORIAS</h3>
-            <ul>
-                <li>CATEGORIA1</li>
-                <li>CATEGORIA2</li>
-                <li>CATEGORIA3</li>
-                <li>CATEGORIA4</li>
-                <li>CATEGORIA5</li>
-            </ul>
-            <h3>ESTRELLAS</h3>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <h3>PRECIO</h3>
-            <input type="range">
+            <h3 class="cat__title">CATEGORIAS</h3>
+            <ul id="listaCats" class="listaCats"></ul>
         </aside>
-        <h2 class="main__title__div card__title">Ultimos Estrenos</h2>
-        <section class="main__section__div">
+        <section>
+        <h2 class="main__title__div card__title" id="estrenos">Ultimos Estrenos</h2>
+        <section class="main__section__div" id="main__section__div">
             <button id="btnIzquierda" class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
             <div class="carousel"></div>
             <button id="btnDerecha" class="header__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#DA0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
         </section>
         <h2 class="main__title__div card__title">Todas las Peliculas</h2>
         <section id="main__section" class="main__section"></section>
-        <!-- <button></button> -->
+        <button class="header__btn return__btn"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#da0037" stroke-width="1" stroke-linecap="square" stroke-linejoin="round"><path d="M17 11l-5-5-5 5M17 18l-5-5-5 5"/></svg></button>
+        </section>
     </main>
     <script src="./scripts/navegacion.js"></script>
 </body>
