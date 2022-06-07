@@ -497,7 +497,7 @@ function mostrarDetalles(title, poster_path, overview, vote_average){
 
   div__carrito.addEventListener("click", () => {
     carritoPeliculas = JSON.parse(localStorage.getItem("carritoPeliculas"))
-    if(carritoPeliculas.some(peli => peli.title == title)){
+    if(carritoPeliculas?.some(peli => peli.title == title)){
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -516,7 +516,7 @@ function mostrarDetalles(title, poster_path, overview, vote_average){
       })
     }else{
     carritoPeliculas = JSON.parse(localStorage.getItem("carritoPeliculas"))
-    carritoPeliculas.push({"title": title, "foto": poster_path, "val": vote_average})
+    carritoPeliculas?.push({"title": title, "foto": poster_path, "val": vote_average})
     localStorage.setItem("carritoPeliculas", JSON.stringify(carritoPeliculas))
     const Toast = Swal.mixin({
       toast: true,
@@ -557,11 +557,11 @@ function carrito(){
   const carrito__title = document.createElement("h3")
   carrito__title.classList.add("carrito__title")
   carritoPeliculas = JSON.parse(localStorage.getItem("carritoPeliculas"))
-  carrito__title.innerHTML = `Carrito (${carritoPeliculas.length})`
+  carrito__title.innerHTML = `Carrito (${carritoPeliculas?.length})`
   const aside__ul = document.createElement("ul")
   aside__ul.classList.add("aside__ul")
-  if(carritoPeliculas.length != 0){
-    carritoPeliculas.forEach(element => {
+  if(carritoPeliculas?.length != 0){
+    carritoPeliculas?.forEach(element => {
       const aside__li = document.createElement("li")
       aside__li.classList.add("aside__li")
       const ul__img = document.createElement("img")
