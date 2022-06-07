@@ -542,10 +542,12 @@ function mostrarDetalles(title, poster_path, overview, vote_average){
 //________________CARRITO_____________
 
 let carritoPeliculas = []
-localStorage.setItem("carritoPelis", JSON.stringify(carritoPeliculas))
 let precioTotal = 0
+localStorage.setItem("carritoPelis", JSON.stringify(carritoPeliculas))
 
 function carrito(){
+  let carritoPeliculas = []
+  let precioTotal = 0
   console.log(carritoPeliculas)
   const tapaTodo = document.createElement("section")
   tapaTodo.classList.add("tapaTodo")
@@ -630,16 +632,7 @@ function carrito(){
   borrar__compras.classList.add("borrar__compras")
   borrar__compras.innerHTML = "Borrar"
 
-  borrar__compras__div.addEventListener("click", () => {
-    carritoPeliculas = []
-    localStorage.setItem("carritoPeliculas", JSON.stringify(carritoPeliculas))
-    precioTotal = 0
-    tapaTodo.classList.add("display--none")
-    section__aside.classList.add("display--none")
-    carrito__aside.classList.add("display--none")
-    carrito__aside.classList.remove("aside")
-    carrito()
-    })
+  borrar__compras__div.addEventListener("click", () => borrarCarrito())
 
   borrar__compras__div.appendChild(borrar__compras)
 
@@ -662,4 +655,16 @@ function carrito(){
     carrito__aside.classList.remove("aside")
 
   })
+
+  function borrarCarrito(){
+    carritoPeliculas = []
+    localStorage.setItem("carritoPeliculas", JSON.stringify(carritoPeliculas))
+    precioTotal = 0
+    tapaTodo.classList.add("display--none")
+    section__aside.classList.add("display--none")
+    carrito__aside.classList.add("display--none")
+    carrito__aside.classList.remove("aside")
+    carrito()
+  }
 }
+
